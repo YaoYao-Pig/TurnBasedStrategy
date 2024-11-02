@@ -56,18 +56,24 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Unit.cs" />
-    <Compile Include="Assets\Scripts\MouseWorld.cs" />
-    <Compile Include="Assets\Scripts\UnitActionSystem.cs" />
-    <Compile Include="Assets\Scripts\UnitSelectedVisual.cs" />
-    <Compile Include="Assets\Scripts\Grid\GridSystem.cs" />
-    <Compile Include="Assets\Scripts\Testing.cs" />
-    <Compile Include="Assets\Scripts\Grid\GridPosition.cs" />
-    <Compile Include="Assets\Scripts\Grid\GridObject.cs" />
-    <Compile Include="Assets\Scripts\Grid\GridDebugObject.cs" />
     <Compile Include="Assets\Scripts\Grid\LevelGrid.cs" />
+    <Compile Include="Assets\Scripts\UnitSelectedVisual.cs" />
+    <Compile Include="Assets\Scripts\Unit.cs" />
+    <Compile Include="Assets\Scripts\Grid\GridPosition.cs" />
+    <Compile Include="Assets\Scripts\Actions\MoveAction.cs" />
+    <Compile Include="Assets\Scripts\Grid\GridSystem.cs" />
+    <Compile Include="Assets\Scripts\Actions\BaseAction.cs" />
+    <Compile Include="Assets\Scripts\MouseWorld.cs" />
+    <Compile Include="Assets\Scripts\Grid\GridDebugObject.cs" />
+    <Compile Include="Assets\Scripts\Grid\GridSystemVisualSingle.cs" />
+    <Compile Include="Assets\Scripts\UnitActionSystem.cs" />
+    <Compile Include="Assets\Scripts\Testing.cs" />
+    <Compile Include="Assets\Scripts\Grid\GridObject.cs" />
+    <Compile Include="Assets\Scripts\Grid\GridSystemVisual.cs" />
+    <Compile Include="Assets\Scripts\Actions\SpinAction.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\MoveAction.cs" />
+    <Compile Include="Assets\Scripts\UnitActionSystemUI.cs" />
+    <Compile Include="Assets\Scripts\ActionButtonUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -805,6 +811,9 @@
     <Reference Include="Unity.Services.Core">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Services.Core.Analytics">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Analytics.dll</HintPath>
     </Reference>
@@ -813,6 +822,9 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
@@ -837,12 +849,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Cinemachine">
-      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

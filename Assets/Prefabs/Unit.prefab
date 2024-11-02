@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 8457143968765162052}
   - component: {fileID: 3173615985477591623}
   - component: {fileID: 9089687512645410110}
+  - component: {fileID: 1253107741441835407}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Untagged
@@ -172,6 +173,18 @@ MonoBehaviour:
   unitAnimator: {fileID: 8362889898723229493}
   moveSpeed: 4
   maxMoveDistance: 1
+--- !u!114 &1253107741441835407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8457143968765162050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e70772a35ed8752418a7641010979098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8457143968905449168
 PrefabInstance:
   m_ObjectHideFlags: 0

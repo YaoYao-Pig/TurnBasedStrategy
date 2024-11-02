@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveAction : MonoBehaviour
+public class MoveAction : BaseAction
 {
     private Vector3 targetPosition;
     private float stoppingDistance = .1f;
@@ -10,37 +11,43 @@ public class MoveAction : MonoBehaviour
     [SerializeField] private Animator unitAnimator;
     [SerializeField] private float moveSpeed = 4.0f;
     [SerializeField] private int maxMoveDistance=4;
-    private Unit unit;
-    private void Awake()
+
+
+    protected override void Awake()
     {
-        unit = GetComponent<Unit>();
+        base.Awake();
         targetPosition = transform.position;
     }
 
     private void Update()
     {
+        if (!isActive) return;
         MoveTowardsTarget();
     }
 
     private void MoveTowardsTarget()
     {
+        Vector3 moveDirection = (targetPosition - transform.position).normalized;
         if (Vector3.Distance(targetPosition, transform.position) >= stoppingDistance)
         {
-            Vector3 moveDirection = (targetPosition - transform.position).normalized;
             transform.position += moveSpeed * moveDirection * Time.deltaTime;
-
-            transform.forward = Vector3.Lerp(transform.forward, moveDirection, unitRotateSpeed * Time.deltaTime);
             unitAnimator.SetBool("IsWalking", true);
         }
         else
         {
+            isActive = false;
             unitAnimator.SetBool("IsWalking", false);
+            onActionComplete.Invoke();
         }
+        transform.forward = Vector3.Lerp(transform.forward, moveDirection, unitRotateSpeed * Time.deltaTime);
+        
     }
 
-    public void Move(GridPosition gridPosition)
+    public void Move(GridPosition gridPosition,Action onActionComplete)
     {
+        this.onActionComplete = onActionComplete;
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+        isActive = true;
     }
 
     public bool IsValidActionGridPosition(GridPosition gridPosition)
@@ -53,9 +60,9 @@ public class MoveAction : MonoBehaviour
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 
         GridPosition unitGridPosition = unit.GetGridPosition();
-        for (int x = -maxMoveDistance; x < maxMoveDistance; ++x)
+        for (int x = -maxMoveDistance; x <= maxMoveDistance; ++x)
         {
-            for(int z = -maxMoveDistance; z < maxMoveDistance; ++z)
+            for(int z = -maxMoveDistance; z <= maxMoveDistance; ++z)
             {
                 GridPosition offsetGridPosition = new GridPosition(x,z);
                 GridPosition testGridPosition = unitGridPosition + offsetGridPosition;
@@ -75,10 +82,14 @@ public class MoveAction : MonoBehaviour
                 {
                     continue;
                 }
-                Debug.Log(testGridPosition);
                 validGridPositionList.Add(testGridPosition);
             }
         }
         return validGridPositionList;
+    }
+
+    public override string GetActionName()
+    {
+        return "Move";
     }
 }

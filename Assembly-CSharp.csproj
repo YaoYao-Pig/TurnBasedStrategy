@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Compile Include="Assets\Scripts\MouseWorld.cs" />
     <Compile Include="Assets\Scripts\UnitActionSystem.cs" />
+    <Compile Include="Assets\Scripts\UnitSelectedVisual.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\PolygonPrototype\Shaders\Prototype_Glass_Global.shader" />

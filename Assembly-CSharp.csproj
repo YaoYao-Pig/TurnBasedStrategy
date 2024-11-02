@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\UnitSelectedVisual.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Compile Include="Assets\Scripts\Grid\GridPosition.cs" />
+    <Compile Include="Assets\Scripts\ActionButtonUI.cs" />
     <Compile Include="Assets\Scripts\Actions\MoveAction.cs" />
     <Compile Include="Assets\Scripts\Grid\GridSystem.cs" />
     <Compile Include="Assets\Scripts\Actions\BaseAction.cs" />
@@ -68,12 +69,12 @@
     <Compile Include="Assets\Scripts\Grid\GridSystemVisualSingle.cs" />
     <Compile Include="Assets\Scripts\UnitActionSystem.cs" />
     <Compile Include="Assets\Scripts\Testing.cs" />
+    <Compile Include="Assets\Scripts\UnitActionSystemUI.cs" />
     <Compile Include="Assets\Scripts\Grid\GridObject.cs" />
     <Compile Include="Assets\Scripts\Grid\GridSystemVisual.cs" />
     <Compile Include="Assets\Scripts\Actions\SpinAction.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\UnitActionSystemUI.cs" />
-    <Compile Include="Assets\Scripts\ActionButtonUI.cs" />
+    <Compile Include="Assets\Scripts\ActionBusyUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -849,6 +850,9 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

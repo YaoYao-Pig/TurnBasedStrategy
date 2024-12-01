@@ -96,6 +96,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebbec8612b85f954195c79ff0c9d01c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6137093801058224122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7565921497999386673}
+  m_Layer: 7
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7565921497999386673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6137093801058224122}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0005, y: 0.0848, z: 0.7321}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8452593925544402364}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8457143968765162050
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,6 +140,9 @@ GameObject:
   - component: {fileID: 3173615985477591623}
   - component: {fileID: 9089687512645410110}
   - component: {fileID: 1253107741441835407}
+  - component: {fileID: 1583711998521978481}
+  - component: {fileID: 3459078532487182001}
+  - component: {fileID: 2643185108138186372}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Untagged
@@ -145,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5153ed5afd5c0814282a780396cec317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnemy: 0
 --- !u!65 &3173615985477591623
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -170,7 +205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5065e81c06edc7d4c9f5a2fe36488fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitAnimator: {fileID: 8362889898723229493}
   moveSpeed: 4
   maxMoveDistance: 1
 --- !u!114 &1253107741441835407
@@ -183,6 +217,47 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e70772a35ed8752418a7641010979098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1583711998521978481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8457143968765162050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f173e1aa49b4ac438706af3bea4bc34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxShootDistance: 4
+--- !u!114 &3459078532487182001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8457143968765162050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 292570e94eab16044b75d3c621216c06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 8362889898723229493}
+  bulletProjectilePrefab: {fileID: 4127982793593075528, guid: 806331f8411f1ea459475a0ba7072a1f,
+    type: 3}
+  shootPointTransform: {fileID: 7565921497999386673}
+--- !u!114 &2643185108138186372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8457143968765162050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 472dd77da384a8e40b63b530c5542296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8457143968905449168
@@ -270,6 +345,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c25ac4fdc903e7d49a7520930673ecd6, type: 3}
+--- !u!4 &8452593925544402364 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4620998167008108, guid: c25ac4fdc903e7d49a7520930673ecd6,
+    type: 3}
+  m_PrefabInstance: {fileID: 8457143968905449168}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8457143969799243117
 PrefabInstance:
   m_ObjectHideFlags: 0

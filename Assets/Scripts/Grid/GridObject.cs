@@ -27,7 +27,6 @@ public class GridObject
     public void AddUnit(Unit unit)
     {
         unitList.Add(unit);
-       
     }
     public void RemoveUnit(Unit unit)
     {
@@ -40,5 +39,17 @@ public class GridObject
     public bool HasAnyUnit()
     {
         return unitList.Count > 0;
+    }
+
+    public Unit GetUnit()
+    {
+        if (HasAnyUnit())
+        {
+            return unitList[0];
+        }
+        else
+        {
+            return null;
+        }
     }
 }

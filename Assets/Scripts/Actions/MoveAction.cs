@@ -8,9 +8,12 @@ public class MoveAction : BaseAction
     private Vector3 targetPosition;
     private float stoppingDistance = .1f;
     private float unitRotateSpeed = 6.0f;
-    [SerializeField] private Animator unitAnimator;
+
     [SerializeField] private float moveSpeed = 4.0f;
     [SerializeField] private int maxMoveDistance=4;
+
+    public event EventHandler OnStartMoving;
+    public event EventHandler OnStopMoving;
 
 
     protected override void Awake()
@@ -31,13 +34,12 @@ public class MoveAction : BaseAction
         if (Vector3.Distance(targetPosition, transform.position) >= stoppingDistance)
         {
             transform.position += moveSpeed * moveDirection * Time.deltaTime;
-            unitAnimator.SetBool("IsWalking", true);
         }
         else
         {
-            isActive = false;
-            unitAnimator.SetBool("IsWalking", false);
-            onActionComplete.Invoke();
+            OnStopMoving?.Invoke(this, EventArgs.Empty);
+            ActionComplete();
+            
         }
         transform.forward = Vector3.Lerp(transform.forward, moveDirection, unitRotateSpeed * Time.deltaTime);
         
@@ -45,10 +47,9 @@ public class MoveAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-
-        this.onActionComplete = onActionComplete;
+        ActionStart(onActionComplete);
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
-        isActive = true;
+        OnStartMoving?.Invoke(this, EventArgs.Empty);
     }
 
     public override List<GridPosition> GetValidActionGridPosition()

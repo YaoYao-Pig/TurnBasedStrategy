@@ -60,21 +60,28 @@
     <Compile Include="Assets\Scripts\UnitSelectedVisual.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Compile Include="Assets\Scripts\Grid\GridPosition.cs" />
-    <Compile Include="Assets\Scripts\ActionButtonUI.cs" />
+    <Compile Include="Assets\Scripts\UI\ActionButtonUI.cs" />
     <Compile Include="Assets\Scripts\Actions\MoveAction.cs" />
+    <Compile Include="Assets\Scripts\Actions\ShootAction.cs" />
+    <Compile Include="Assets\Scripts\UnitAnimator.cs" />
+    <Compile Include="Assets\Scripts\UI\TurnSystemUI.cs" />
+    <Compile Include="Assets\Scripts\UI\ActionBusyUI.cs" />
     <Compile Include="Assets\Scripts\Grid\GridSystem.cs" />
     <Compile Include="Assets\Scripts\Actions\BaseAction.cs" />
+    <Compile Include="Assets\Scripts\EnemyAI.cs" />
+    <Compile Include="Assets\Scripts\TurnSystem.cs" />
     <Compile Include="Assets\Scripts\MouseWorld.cs" />
     <Compile Include="Assets\Scripts\Grid\GridDebugObject.cs" />
     <Compile Include="Assets\Scripts\Grid\GridSystemVisualSingle.cs" />
     <Compile Include="Assets\Scripts\UnitActionSystem.cs" />
     <Compile Include="Assets\Scripts\Testing.cs" />
-    <Compile Include="Assets\Scripts\UnitActionSystemUI.cs" />
+    <Compile Include="Assets\Scripts\UI\UnitActionSystemUI.cs" />
     <Compile Include="Assets\Scripts\Grid\GridObject.cs" />
     <Compile Include="Assets\Scripts\Grid\GridSystemVisual.cs" />
     <Compile Include="Assets\Scripts\Actions\SpinAction.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\ActionBusyUI.cs" />
+    <Compile Include="Assets\Scripts\BulletProjectile.cs" />
+    <Compile Include="Assets\Scripts\HealthSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -776,8 +783,8 @@
     <Reference Include="Unity.Searcher.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
@@ -799,6 +806,9 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
@@ -850,9 +860,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

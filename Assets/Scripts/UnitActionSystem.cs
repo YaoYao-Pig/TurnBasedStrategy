@@ -28,6 +28,7 @@ public class UnitActionSystem : MonoBehaviour
     public event EventHandler OnSelectedUnitChanged;
     public event EventHandler OnActionChanged;
     public event EventHandler<bool> OnBusyUIChanged;
+    public event EventHandler OnActionStart;
 
 
     [SerializeField] private Unit selectedUnit;
@@ -57,6 +58,10 @@ public class UnitActionSystem : MonoBehaviour
         {
             return;
         }
+        if (!TurnSystem.Instance.IsPlayerTurn())
+        {
+            return;
+        }
         if (EventSystem.current.IsPointerOverGameObject())
         {
             return;
@@ -75,11 +80,12 @@ public class UnitActionSystem : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.Instance.GetPosition());
-            if (selectedAction.IsValidActionGridPosition(mouseGridPosition))
-            {
-                SetBusy();
-                selectedAction.TakeAction(mouseGridPosition, ClearBusy);
-            }
+            if (!selectedAction.IsValidActionGridPosition(mouseGridPosition)) return;
+            if (!selectedUnit.TrySpendActionPointsToTakeAction(selectedAction)) return;
+            SetBusy();
+            selectedAction.TakeAction(mouseGridPosition, ClearBusy);
+
+            OnActionStart?.Invoke(this,EventArgs.Empty);
         }
     }
 
@@ -111,6 +117,10 @@ public class UnitActionSystem : MonoBehaviour
                 if (result.transform.TryGetComponent<Unit>(out Unit unit))
                 {
                     if (unit == selectedUnit)
+                    {
+                        return false;
+                    }
+                    if (unit.GetIsEnemy())
                     {
                         return false;
                     }

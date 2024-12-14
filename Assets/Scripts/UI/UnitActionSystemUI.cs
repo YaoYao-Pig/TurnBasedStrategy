@@ -18,7 +18,7 @@ public class UnitActionSystemUI : MonoBehaviour
     private void Start()
     {
         UnitActionSystem.Instance.OnSelectedUnitChanged+= UnityActionSystem_OnSelectedUnitActionButtons;
-        UnitActionSystem.Instance.OnActionChanged += UnityActionSystem_OnSelectedActionChanged;
+        UnitActionSystem.Instance.OnSelectedActionChanged += UnityActionSystem_OnSelectedActionChanged;
         UnitActionSystem.Instance.OnActionStart += UnityActionSystem_OnActionStart;
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
 

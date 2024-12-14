@@ -41,6 +41,7 @@ public class UnitSelectedVisual : MonoBehaviour
     }
     public void OnDestroy()
     {
+        if (!this.gameObject.scene.isLoaded) return;
         UnitActionSystem.Instance.OnSelectedUnitChanged -= UnitActionSystem_OnSelectedUnitChanged;
     }
 }

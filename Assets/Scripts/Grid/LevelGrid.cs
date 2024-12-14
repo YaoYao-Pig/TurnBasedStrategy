@@ -1,13 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelGrid : MonoBehaviour
 {
-    private GridSystem gridSystem;
+    private GridSystem<GridObject> gridSystem;
     [SerializeField] private GameObject gridDebugPrefab;
 
     private static LevelGrid _instance;
+
+    public event EventHandler OnAnyUnitMovedGridPosition;
+
+
+    [SerializeField]private int width;
+    [SerializeField] private int height;
+    [SerializeField] private float cellsize;
     public static LevelGrid Instance
     {
         get { return _instance; }
@@ -21,8 +29,14 @@ public class LevelGrid : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        gridSystem = new GridSystem(10, 10, 2f);
-        gridSystem.CreateDebugObjects(gridDebugPrefab);
+        gridSystem = new GridSystem<GridObject>(width,height,cellsize,
+            (GridSystem<GridObject> g,GridPosition gridPosition)=> new GridObject(g,gridPosition));
+        // gridSystem.CreateDebugObjects(gridDebugPrefab);
+    }
+
+    private void Start()
+    {
+        PathFinding.Instance.Setup(width, height, cellsize);
     }
 
     //设置某个Unit归属于某个Grid
@@ -49,6 +63,8 @@ public class LevelGrid : MonoBehaviour
     {
         RemoveUnitAtGridPosition(fromGridPosition,unit);
         AddUnitAtGridPosition(toGridPosition, unit);
+
+        OnAnyUnitMovedGridPosition?.Invoke(this, EventArgs.Empty);
     }
     //暴露gridSystem的接口
     public GridPosition GetGridPosition(Vector3 worldPosition) => gridSystem.GetGridPosition(worldPosition);

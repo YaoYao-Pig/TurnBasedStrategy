@@ -10,21 +10,21 @@ public class SpinAction : BaseAction
 
     private void Update()
     {
-        if (!isActive)   return;
-        
+        if (!isActive) return;
+
         float spinAddAmount = 360f * Time.deltaTime;
         transform.eulerAngles += new Vector3(0, spinAddAmount, 0);
         totalSpinAmount += spinAddAmount;
         if (totalSpinAmount >= 360f)
         {
-            
+
             ActionComplete();
         }
     }
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        ActionStart(onActionComplete);
         totalSpinAmount = 0.0f;
+        ActionStart(onActionComplete);
     }
     public override List<GridPosition> GetValidActionGridPosition()
     {
@@ -40,7 +40,12 @@ public class SpinAction : BaseAction
 
     public override int GetActionPointCost()
     {
+
         return 2;
     }
 
+    public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
+    {
+        return new EnemyAIAction { gridPosition = gridPosition, actionValue = 0 };
+    }
 }

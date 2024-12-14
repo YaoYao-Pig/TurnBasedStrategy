@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class GridObject 
 {
-    private GridSystem gridSystem;
+    private GridSystem<GridObject> gridSystem;
     private GridPosition gridPosition;
     private List<Unit> unitList;
-    public GridObject(GridSystem _gridSystem,GridPosition _gridPosition)
+    public GridObject(GridSystem<GridObject> _gridSystem,GridPosition _gridPosition)
     {
         this.gridSystem = _gridSystem;
         this.gridPosition = _gridPosition;

@@ -26,7 +26,7 @@ public class UnitActionSystem : MonoBehaviour
         
     }
     public event EventHandler OnSelectedUnitChanged;
-    public event EventHandler OnActionChanged;
+    public event EventHandler OnSelectedActionChanged;
     public event EventHandler<bool> OnBusyUIChanged;
     public event EventHandler OnActionStart;
 
@@ -137,7 +137,7 @@ public class UnitActionSystem : MonoBehaviour
     {
         selectedUnit = unit;
         //默认情况下，选中一个Unit的默认动作是Move
-        SetSelectedAction(unit.GetMoveAction());
+        SetSelectedAction(unit.GetAction<MoveAction>());
         OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -148,7 +148,7 @@ public class UnitActionSystem : MonoBehaviour
     public void SetSelectedAction(BaseAction baseAction)
     {
         selectedAction = baseAction;
-        OnActionChanged?.Invoke(this,EventArgs.Empty);
+        OnSelectedActionChanged?.Invoke(this,EventArgs.Empty);
     }
 
     public Unit GetSelectedUnit() {

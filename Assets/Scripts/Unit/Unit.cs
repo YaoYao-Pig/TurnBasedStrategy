@@ -10,18 +10,16 @@ public class Unit : MonoBehaviour
     private GridPosition gridPosition;
     private HealthSystem healthSystem;
     private BaseAction[] baseActionArray;
-    private MoveAction moveAction;
-    private SpinAction spinAction;
     private int actionPoints = ACTION_POINTS_MAX;
 
     public static event EventHandler OnAnyActionPointsChanged;
+    public static event EventHandler OnAnyUnitSpawned;
+    public static event EventHandler OnAnyUnitDead;
     [SerializeField] private bool isEnemy;
 
     private void Awake()
     {
         healthSystem = GetComponent<HealthSystem>();
-        moveAction = GetComponent<MoveAction>();
-        spinAction = GetComponent<SpinAction>();
         baseActionArray = GetComponents<BaseAction>();
     }
     private void Start()
@@ -31,6 +29,7 @@ public class Unit : MonoBehaviour
 
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
         healthSystem.OnDead += HealthSystem_OnDead;
+        OnAnyUnitSpawned?.Invoke(this, EventArgs.Empty);
     }
 
 
@@ -40,19 +39,22 @@ public class Unit : MonoBehaviour
         GridPosition newGridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         if (newGridPosition != gridPosition)
         {
-            LevelGrid.Instance.UnitMoveGridPosition(this, gridPosition,newGridPosition);
+
+            GridPosition oldGridPOsition = gridPosition;
             gridPosition = newGridPosition;
+            LevelGrid.Instance.UnitMoveGridPosition(this, oldGridPOsition, newGridPosition);
         }
     }
-
-    public MoveAction GetMoveAction()
+    public T GetAction<T>() where T : BaseAction
     {
-        return moveAction;
-    }
-
-    public SpinAction GetSpinAction()
-    {
-        return spinAction;
+        foreach(BaseAction baseAction in baseActionArray)
+        {
+            if(baseAction is T)
+            {
+                return (T)baseAction;
+            }
+        }
+        return null;
     }
     public GridPosition GetGridPosition()
     {
@@ -78,7 +80,7 @@ public class Unit : MonoBehaviour
         }
         return false;
     }
-    private bool  CanSpendActionPointsToTakeAction(BaseAction baseAction)
+    public bool  CanSpendActionPointsToTakeAction(BaseAction baseAction)
     {
         if (actionPoints >= baseAction.GetActionPointCost())
         {
@@ -124,5 +126,11 @@ public class Unit : MonoBehaviour
     {
         LevelGrid.Instance.RemoveUnitAtGridPosition(gridPosition, this);
         Destroy(gameObject);
+        OnAnyUnitDead?.Invoke(this, EventArgs.Empty);
+    }
+
+    public HealthSystem GetHealthSystem()
+    {
+        return healthSystem;
     }
 }

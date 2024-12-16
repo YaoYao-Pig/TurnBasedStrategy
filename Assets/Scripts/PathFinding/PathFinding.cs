@@ -8,12 +8,12 @@ public class PathFinding : MonoBehaviour
     private int width;
     private int height;
     private float cellsize;
-    private GridSystem<PathNode> gridSystem;
+    private GridSystemHex<PathNode> gridSystem;
     [SerializeField] private Transform gridDebugPrefab;
     [SerializeField] private LayerMask obstacleLayerMask;
     public static PathFinding Instance;
 
-    private readonly int MOVE_DIAGONAL_COST=14;
+
     private readonly int MOVE_STRAIGHT_COST = 10;
     public void Awake()
     {
@@ -48,7 +48,7 @@ public class PathFinding : MonoBehaviour
         }
 
         startNode.SetGCost(0);
-        startNode.SetHCost(CaculateDistance(startGridPosition,endGridPosition));
+        startNode.SetHCost(CaculateHeuristDistance(startGridPosition,endGridPosition));
         startNode.ResetCameFromPathNode();
 
         while (openList.Count > 0)
@@ -75,7 +75,7 @@ public class PathFinding : MonoBehaviour
                     closeList.Add(neigbourPathNode);
                     continue;
                 }
-                int tentativeGCost = currentPathNode.GetGCost() + CaculateDistance(currentPathNode.GetGridPosition(), neigbourPathNode.GetGridPosition());
+                int tentativeGCost = currentPathNode.GetGCost() + MOVE_STRAIGHT_COST;
 
 
                 //经由当前点到邻居节点，距离start的距离比邻居节点直接到start的距离更近
@@ -84,7 +84,7 @@ public class PathFinding : MonoBehaviour
                 {
                     neigbourPathNode.SetCameFromPathNode(currentPathNode);
                     neigbourPathNode.SetGCost(tentativeGCost);
-                    neigbourPathNode.SetHCost(CaculateDistance(neigbourPathNode.GetGridPosition(), endGridPosition));
+                    neigbourPathNode.SetHCost(CaculateHeuristDistance(neigbourPathNode.GetGridPosition(), endGridPosition));
                     neigbourPathNode.CaculateFCost();
                     if (!openList.Contains(neigbourPathNode))
                     {
@@ -99,14 +99,9 @@ public class PathFinding : MonoBehaviour
         return null;
 
     }
-    public int CaculateDistance(GridPosition gridPositionA,GridPosition gridPositionB)
+    public int CaculateHeuristDistance(GridPosition gridPositionA,GridPosition gridPositionB)
     {
-        GridPosition gridPositionDistance = gridPositionA - gridPositionB;
-        int totalDistance = Mathf.Abs(gridPositionDistance.x) + Mathf.Abs(gridPositionDistance.z);
-        int xDistance = Mathf.Abs(gridPositionDistance.x);
-        int zDistance = Mathf.Abs(gridPositionDistance.z);
-        int remaining = Mathf.Abs(xDistance - zDistance);
-        return MOVE_DIAGONAL_COST * Mathf.Min(zDistance, xDistance) + MOVE_STRAIGHT_COST * remaining;
+        return MOVE_STRAIGHT_COST*Mathf.RoundToInt(Vector3.Distance(LevelGrid.Instance.GetWorldPosition(gridPositionA), LevelGrid.Instance.GetWorldPosition(gridPositionB)));
     }
     public PathNode GetLowestFCostPathNode(List<PathNode> pathNodeList)
     {
@@ -121,15 +116,29 @@ public class PathFinding : MonoBehaviour
         return lowestFCostPathNode;
     }
 
+    private int[] oddNeigbourXOffset = new int[6] { -1, 1, 0, 0 , 1, 1};
+    private int[] oddNeigbourZOffset = new int[6] { 0, 0, 1, -1 , 1, -1};
 
-    private int[] neigbourXOffset = new int[8] { 1, -1, 1, -1 , 0, 0, 1, -1};
-    private int[] neigbourZOffset = new int[8] { -1, 1, 1, -1 , 1, -1, 0, 0};
+    private int[] evenNeigbourXOffset = new int[6] { -1, 1, 0, 0, -1, -1 };
+    private int[] evenNeigbourZOffset = new int[6] { 0, 0, 1, -1, 1, -1 };
 
     public List<PathNode> GetNeigbourList(PathNode pathNode)
     {
         List<PathNode> neigbourList = new List<PathNode>();
-        
-        for(int offset = 0; offset < 8; ++offset)
+        int[] neigbourXOffset;
+        int[] neigbourZOffset;
+        bool isOddRow = pathNode.GetGridPosition().z % 2 == 1;
+        if (isOddRow)
+        {
+            neigbourXOffset = oddNeigbourXOffset;
+            neigbourZOffset = oddNeigbourZOffset;
+        }
+        else
+        {
+            neigbourXOffset = evenNeigbourXOffset;
+            neigbourZOffset = evenNeigbourZOffset;
+        }
+        for(int offset = 0; offset < 6; ++offset)
         {
             int xOffset = neigbourXOffset[offset];
             int zOffset = neigbourZOffset[offset];
@@ -169,8 +178,8 @@ public class PathFinding : MonoBehaviour
         this.width = width;
         this.height = height;
         this.cellsize = cellSize;
-        gridSystem = new GridSystem<PathNode>(width, height, cellsize,
-            (GridSystem<PathNode> gridSystem, GridPosition gridPosition) => new PathNode(gridPosition));
+        gridSystem = new GridSystemHex<PathNode>(width, height, cellsize,
+            (GridSystemHex<PathNode> gridSystem, GridPosition gridPosition) => new PathNode(gridPosition));
         //gridSystem.CreateDebugObjects(gridDebugPrefab);
         
         for(int x = 0; x < width; ++x)

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LevelGrid : MonoBehaviour
 {
-    private GridSystem<GridObject> gridSystem;
+    private GridSystemHex<GridObject> gridSystem;
     [SerializeField] private GameObject gridDebugPrefab;
 
     private static LevelGrid _instance;
@@ -29,8 +29,8 @@ public class LevelGrid : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        gridSystem = new GridSystem<GridObject>(width,height,cellsize,
-            (GridSystem<GridObject> g,GridPosition gridPosition)=> new GridObject(g,gridPosition));
+        gridSystem = new GridSystemHex<GridObject>(width,height,cellsize,
+            (GridSystemHex<GridObject> g,GridPosition gridPosition)=> new GridObject(g,gridPosition));
         // gridSystem.CreateDebugObjects(gridDebugPrefab);
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class GridSystemVisualSingle : MonoBehaviour
 {
     [SerializeField] private MeshRenderer meshRender;
+    [SerializeField] private GameObject selectedGameObject;
 
     public void Show(Material material)
     {
@@ -14,5 +15,14 @@ public class GridSystemVisualSingle : MonoBehaviour
     public void Hide()
     {
         meshRender.enabled = false;
+    }
+
+    public void ShowSelected()
+    {
+        selectedGameObject.SetActive(true);
+    }
+    public void HideSelected()
+    {
+        selectedGameObject.SetActive(false);
     }
 }

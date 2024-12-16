@@ -53,4 +53,5 @@ public struct GridPosition :IEquatable<GridPosition>
     {
         return new GridPosition(a.x - b.x, a.z - b.z);
     }
+    
 }

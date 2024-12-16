@@ -92,7 +92,7 @@
     <Compile Include="Assets\Scripts\Actions\ShootAction.cs" />
     <Compile Include="Assets\Scripts\Actions\InteractAction.cs" />
     <Compile Include="Assets\Scripts\DestructibleCrate.cs" />
-    <Compile Include="Assets\Scripts\Grid\GridSystem.cs" />
+    <Compile Include="Assets\Scripts\Grid\GridSystemHex.cs" />
     <Compile Include="Assets\Scripts\BulletProjectile.cs" />
     <Compile Include="Assets\Scripts\GrenadeProjectile.cs" />
     <Compile Include="Assets\Scripts\MouseWorld.cs" />

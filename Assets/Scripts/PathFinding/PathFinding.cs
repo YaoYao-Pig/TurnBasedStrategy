@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Better.Container;
+using Better.Functor;
 
 public class PathFinding : MonoBehaviour
 {
@@ -105,15 +107,14 @@ public class PathFinding : MonoBehaviour
     }
     public PathNode GetLowestFCostPathNode(List<PathNode> pathNodeList)
     {
-        PathNode lowestFCostPathNode = pathNodeList[0];
-        foreach(PathNode pathNode in pathNodeList)
-        {
-            if (pathNode.GetfCost() < lowestFCostPathNode.GetfCost())
-            {
-                lowestFCostPathNode = pathNode;
-            }
-        }
-        return lowestFCostPathNode;
+        Comparetor<PathNode> comparetor = (PathNode a, PathNode b) =>
+          {
+              return a.GetfCost() < b.GetfCost();
+          };
+        Priority_Queue<PathNode> priority_Queue = new Priority_Queue<PathNode>(comparetor);
+        priority_Queue.InserArray(pathNodeList);
+
+        return priority_Queue.Front(); 
     }
 
     private int[] oddNeigbourXOffset = new int[6] { -1, 1, 0, 0 , 1, 1};

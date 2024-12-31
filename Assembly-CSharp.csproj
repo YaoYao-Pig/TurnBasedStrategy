@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="D:\CodingProgram\TurnBasedStrategy\Assets\Plugins\ClassLibrary-BetterCSharp.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Grid\LevelGrid.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Assets\Scripts\Actions\SpinAction.cs" />
     <Compile Include="Assets\Scripts\Unit\UnitRagdollSpawner.cs" />
     <Compile Include="Assets\Scripts\Unit\Unit.cs" />
+    <Compile Include="Assets\PlayerInpuActions.cs" />
     <Compile Include="Assets\Scripts\UI\ActionButtonUI.cs" />
     <Compile Include="Assets\Scripts\Actions\ShootAction.cs" />
     <Compile Include="Assets\Scripts\Actions\InteractAction.cs" />
@@ -104,7 +106,6 @@
     <Compile Include="Assets\Scripts\Testing.cs" />
     <Compile Include="Assets\Scripts\Actions\GrenadeAction.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
-    <Compile Include="Assets\PlayerInpuActions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -400,6 +401,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ClassLibrary-BetterCSharp">
+      <HintPath>Assets\Plugins\ClassLibrary-BetterCSharp.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>D:\Software\GameDevelopment\2021.3.16f1c1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>

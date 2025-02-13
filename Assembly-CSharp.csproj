@@ -54,7 +54,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-    <Analyzer Include="D:\CodingProgram\TurnBasedStrategy\Assets\Plugins\ClassLibrary-BetterCSharp.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Grid\LevelGrid.cs" />
@@ -384,6 +383,9 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>D:\Software\GameDevelopment\2021.3.16f1c1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
+    <Reference Include="ClassLibrary-BetterCSharp">
+      <HintPath>Assets\Plugins\ClassLibrary-BetterCSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Burst.Cecil.Mdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.8.2\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
     </Reference>
@@ -401,9 +403,6 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="ClassLibrary-BetterCSharp">
-      <HintPath>Assets\Plugins\ClassLibrary-BetterCSharp.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>D:\Software\GameDevelopment\2021.3.16f1c1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>

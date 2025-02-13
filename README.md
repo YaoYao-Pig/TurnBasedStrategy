@@ -4,3 +4,7 @@ This repo is made follow the Code Monkey's lecture.
 In different branches:
 + Lecture1 QuadGridTurnBasedStrategy
 + Lecture2 HexGridTurnBasedStrategy
+
+
+
+[](.\Video\play.mp4)
